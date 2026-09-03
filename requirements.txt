@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+sqlalchemy
+psycopg2-binary
+pydantic-settings
+
+sentence-transformers
+faiss-cpu
+numpy
+
+pypdf
+python-docx
+
+requests

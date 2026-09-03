@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Enterprise AI Knowledge Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">AI</div>
+
+            <div>
+                <h2>Enterprise AI</h2>
+                <span>Knowledge Assistant</span>
+            </div>
+        </div>
+
+        <button class="new-chat" onclick="newChat()">
+            ＋ New Chat
+        </button>
+
+        <div class="sidebar-section">
+
+            <p class="section-title">Workspace</p>
+
+            <div class="menu-item active"  id="chatMenu" onclick="showChat()">
+                💬 Chat
+            </div>
+
+            <div class="menu-item" id="knowledgeMenu" onclick="showKnowledgeBase()">
+                📚 Knowledge Base
+            </div>
+
+            <div class="menu-item"  id="analyticsMenu" onclick="showAnalytics()">
+                📊 Analytics
+            </div>  
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>AI services operational</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div>
+                <h1 id="pageTitle">Knowledge Assistant</h1>
+
+                <p id="pageSubtitle">
+                    Ask questions about your organization's knowledge
+                </p>
+            </div>
+
+            <div class="header-right">
+
+                <span class="connection">
+                    ● Connected
+                </span>
+
+                <div class="avatar">
+                    G
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CHAT PAGE -->
+        <section id="chatPage" class="page chat-page">
+
+            <div id="messages" class="messages">
+
+                <div class="welcome" id="welcome">
+
+                    <div class="welcome-icon">
+                        ✨
+                    </div>
+
+                    <h2>
+                        How can I help you today?
+                    </h2>
+
+                    <p>
+                        Ask me anything about your company's
+                        documents, policies, projects or knowledge base.
+                    </p>
+
+                    <div class="suggestions">
+
+                        <button onclick="useSuggestion(this)">
+                            What is our leave policy?
+                        </button>
+
+                        <button onclick="useSuggestion(this)">
+                            Explain our company architecture
+                        </button>
+
+                        <button onclick="useSuggestion(this)">
+                            Summarize the latest project
+                        </button>
+
+                        <button onclick="useSuggestion(this)">
+                            What technologies do we use?
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TYPING -->
+            <div id="typing" class="typing hidden">
+
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <label>
+                    AI is thinking...
+                </label>
+
+            </div>
+
+
+            <!-- INPUT -->
+            <div class="input-area">
+
+                <div class="input-wrapper">
+
+                    <textarea
+                        id="question"
+                        placeholder="Ask anything..."
+                        rows="1"
+                        onkeydown="handleKey(event)"
+                    ></textarea>
+
+                    <button
+                        id="sendButton"
+                        onclick="sendMessage()"
+                    >
+                        ➤
+                    </button>
+
+                </div>
+
+                <div class="input-info">
+
+                    <span>
+                        Enterprise AI Assistant
+                    </span>
+
+                    <span>
+                        Enter to send • Shift + Enter for new line
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- KNOWLEDGE BASE -->
+        <section id="knowledgePage" class="page knowledge-page hidden">
+
+            <div class="knowledge-header">
+
+                <div>
+
+                    <h2>
+                        Knowledge Base
+                    </h2>
+
+                    <p>
+                        Upload documents that the AI can use to answer questions.
+                    </p>
+
+                </div>
+
+                <label class="upload-button">
+
+                    ＋ Upload Document
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf,.docx,.txt"
+                        hidden
+                        onchange="uploadDocument()"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <!-- UPLOAD BOX -->
+            <div
+                class="upload-box"
+                id="uploadBox"
+                onclick="document.getElementById('fileInput').click()"
+            >
+
+                <div class="upload-icon">
+                    ☁
+                </div>
+
+                <h3>
+                    Upload your knowledge
+                </h3>
+
+                <p>
+                    Drag & drop or click to upload
+                </p>
+
+                <small>
+                    PDF, DOCX and TXT supported
+                </small>
+
+            </div>
+
+
+            <!-- UPLOAD STATUS -->
+            <div
+                id="uploadStatus"
+                class="upload-status hidden"
+            ></div>
+
+
+            <!-- DOCUMENTS -->
+            <div class="documents-section">
+
+                <div class="documents-title">
+
+                    <h3>
+                        Uploaded Documents
+                    </h3>
+
+                    <button onclick="loadDocuments()">
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+                <div id="documentsList">
+
+                    <div class="empty-documents">
+                        Loading documents...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ANALYTICS PAGE -->
+
+    <!-- ANALYTICS PAGE -->
+
+<section
+    id="analyticsPage"
+    class="page analytics-page hidden"
+>
+
+    <div class="analytics-container">
+
+        <div class="analytics-header">
+
+            <div>
+                <h2>Analytics Dashboard</h2>
+
+                <p>
+                    Monitor your AI knowledge system performance.
+                </p>
+            </div>
+
+            <button
+                class="refresh-analytics"
+                onclick="loadAnalytics()"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="analytics-grid">
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon">
+                    📄
+                </div>
+
+                <div>
+                    <span>Total Documents</span>
+
+                    <h2 id="totalDocuments">
+                        --
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon">
+                    🧩
+                </div>
+
+                <div>
+                    <span>Indexed Chunks</span>
+
+                    <h2 id="totalChunks">
+                        --
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon">
+                    💬
+                </div>
+
+                <div>
+                    <span>Questions Asked</span>
+
+                    <h2 id="totalQuestions">
+                        0
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon">
+                    ⚡
+                </div>
+
+                <div>
+                    <span>Avg Response Time</span>
+
+                    <h2 id="averageResponse">
+                        --
+                    </h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM HEALTH -->
+
+        <div class="analytics-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h3>System Health</h3>
+
+                    <p>
+                        Current status of AI services
+                    </p>
+                </div>
+
+                <div class="system-live">
+                    <span></span>
+                    System Live
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+                <div class="overview-item">
+
+                    <span>AI Backend</span>
+
+                    <strong id="backendStatus">
+                        Checking...
+                    </strong>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <span>Vector Database</span>
+
+                    <strong id="vectorStatus">
+                        Ready
+                    </strong>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <span>AI Model</span>
+
+                    <strong id="modelStatus">
+                        Checking...
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT QUESTIONS -->
+
+        <div class="analytics-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h3>Recent Questions</h3>
+
+                    <p>
+                        Your latest AI queries
+                    </p>
+                </div>
+
+                <button
+                    class="refresh-analytics"
+                    onclick="clearAnalyticsHistory()"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+
+            <div
+                id="recentQuestions"
+                class="recent-questions"
+            >
+
+                <div class="empty-analytics">
+                    No questions asked yet.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    </main>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
