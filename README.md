@@ -428,8 +428,8 @@ This project demonstrates practical implementation of:
 
 CSE-AIML | Software Developer | AI/ML Enthusiast
 
-* GitHub: [YOUR_GITHUB_PROFILE](YOUR_GITHUB_PROFILE)
-* LinkedIn: [YOUR_LINKEDIN_PROFILE](YOUR_LINKEDIN_PROFILE)
+* GitHub: [YOUR_GITHUB_PROFILE](https://github.com/Gungunag1)
+* LinkedIn: [YOUR_LINKEDIN_PROFILE](https://www.linkedin.com/in/gungun-agrawal-371754247/)
 
 ---
 
