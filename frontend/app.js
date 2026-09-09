@@ -842,8 +842,7 @@ async function loadDocuments() {
 
                 <br><br>
 
-                Make sure FastAPI is running
-                on port 8001.
+                Please check that the AI backend is available.
 
             </div>
 
