@@ -104,6 +104,7 @@ def warm_up_model():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://enterprisea.netlify.app",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://localhost:5173",
