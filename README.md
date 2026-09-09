@@ -4,11 +4,6 @@ An intelligent **Retrieval-Augmented Generation (RAG)** based AI assistant that 
 
 The system uses **semantic search with FAISS** to retrieve relevant information from uploaded documents and generates answers using **Llama 3.2 through Ollama**.
 
----
-
-## 🚀 Live Demo
-
-🔗 [Open Live Application](YOUR_DEPLOYMENT_URL)
 
 ---
 
